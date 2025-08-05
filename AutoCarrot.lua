@@ -4,9 +4,15 @@ end
 
 local GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 local GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
+local useNormal = false
 
 local CROP_OR_CARROT_ID = nil
 local hasEnteredWorld = false
+
+hooksecurefunc("CastSpellByName", function(spellName, bookType, bookIndex)
+    useNormal = true;
+end)   
+
 local f = CreateFrame("Frame")
 f:RegisterEvent('PLAYER_ENTERING_WORLD')
 f:RegisterEvent('PLAYER_LEAVING_WORLD')
@@ -16,7 +22,7 @@ f:RegisterEvent('PLAYER_EQUIPMENT_CHANGED')
 f:SetScript("OnUpdate", function()
     if(not hasEnteredWorld or not UnitExists("player") or not UnitIsConnected("player") or not AutoCarrotDB.enabled or InCombatLockdown() or UnitIsDeadOrGhost("player")) then return end
     if(UnitLevel("player") <= 70) then
-        if(IsMounted() and not UnitOnTaxi("player")) then
+        if(IsMounted() and not UnitOnTaxi("player") and not useNormal) then
             local itemId = GetInventoryItemID("player", AutoCarrotDB.trinketSlot1 and 13 or 14) -- trinket slot 1/2
             if(itemId) then
                 if(itemId ~= 25653 and itemId ~= 11122 and itemId ~= 32863) then
@@ -66,6 +72,9 @@ f:SetScript("OnUpdate", function()
                 end
             end
         else
+            if not IsMounted() then
+                useNormal = false
+            end
             local itemId = GetInventoryItemID("player", AutoCarrotDB.trinketSlot1 and 13 or 14) -- trinket slot 1/2
             if(itemId) then
                 if(itemId ~= 25653 and itemId ~= 11122 and itemId ~= 32863) then
