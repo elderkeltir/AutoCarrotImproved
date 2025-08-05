@@ -1,8 +1,8 @@
 ## Interface: 11304
-## Title: AutoCarrot
-## Author: kebabstorm
-## Notes: Equips Carrot on a Stick automatically when mounted
+## Title: AutoCarrotImproved
+## Author: kebabstorm, keltir
+## Notes: Equips Carrot on a Stick automatically when mounted AND unequip it when starting a fight
 ## SavedVariablesPerCharacter: AutoCarrotDB
 ## Version: 3.01
 
-AutoCarrot.lua
+AutoCarrotImproved.lua

@@ -171,7 +171,7 @@ end)
 f:SetScript('OnEvent', function(self, event, ...)
     if(event == 'ADDON_LOADED') then 
         local addon = ...
-        if(addon == 'AutoCarrot') then
+        if(addon == 'AutoCarrotImproved') then
             AutoCarrot_OnLoad()
         end
     elseif(event == 'PLAYER_LEAVING_WORLD') then
